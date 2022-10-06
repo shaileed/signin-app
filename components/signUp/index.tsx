@@ -1,28 +1,28 @@
 import React, { useState } from 'react';
+import {useDispatch,useSelector} from 'react-redux';
+import { useRouter } from 'next/router';
 import {Form, Button} from 'react-bootstrap';
+import { ISignupData } from '../../interface';
+import { addNewUser } from '../../store/userSlice';
 
-interface signupData {
-    name: string,
-    contactNo: number,
-    email: string,
-    password: string
-}
 
 const SignUp = () => {
     const [name , setName] = useState<string>("");
     const [contactNo, setContactNo] = useState<number>(0);
     const [email, setEmail] = useState<string>("");
     const [password, setPassword] = useState<string>("");
-
+    const dispatch = useDispatch();
+    const route = useRouter();
     const handleRegistration = (event:React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
-        var data:signupData = {
+        var data:ISignupData = {
             name : name,
             contactNo : contactNo,
             email: email,
             password: password
         };
-        console.log("data",data);
+        dispatch(addNewUser(data));
+        route.push("/");
     }
 
     return (
@@ -33,7 +33,7 @@ const SignUp = () => {
             </Form.Group>
             <Form.Group className="mb-3" controlId="exampleForm.ControlInputContactNo">
                 <Form.Label>Contact Number</Form.Label>
-                <Form.Control type="text" name="contactNo" pattern="[0-9]" placeholder="Contact Number" onChange={(event:React.ChangeEvent<HTMLInputElement>) => setContactNo(parseInt(event.target.value)) } />
+                <Form.Control type="text" name="contactNo"  placeholder="Contact Number" onChange={(event:React.ChangeEvent<HTMLInputElement>) => setContactNo(parseInt(event.target.value)) } />
             </Form.Group>
             <Form.Group className="mb-3" controlId="exampleForm.ControlInputEmail">
                 <Form.Label>Email address</Form.Label>
