@@ -1,11 +1,7 @@
 import React, { useState } from 'react';
 import {Form, Button} from 'react-bootstrap';
 import Link from 'next/link';
-
-interface loginData {
-    email: string,
-    password: string
-}
+import { ILoginData } from '../../interface';
 
 const Login = () => {
     const [email, setEmail] = useState<string>("");
@@ -13,7 +9,7 @@ const Login = () => {
 
     const handleLogin = (event:React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
-        var data:loginData = {
+        var data:ILoginData = {
             email: email,
             password: password
         };

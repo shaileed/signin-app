@@ -1,12 +1,6 @@
 import React, { useState } from 'react';
 import {Form, Button} from 'react-bootstrap';
-
-interface signupData {
-    name: string,
-    contactNo: number,
-    email: string,
-    password: string
-}
+import { ISignupData } from '../../interface';
 
 const SignUp = () => {
     const [name , setName] = useState<string>("");
@@ -16,7 +10,7 @@ const SignUp = () => {
 
     const handleRegistration = (event:React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
-        var data:signupData = {
+        var data:ISignupData = {
             name : name,
             contactNo : contactNo,
             email: email,
